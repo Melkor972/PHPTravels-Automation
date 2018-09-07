@@ -35,10 +35,19 @@ public class TourSearchBar extends CommonMethods
     private WebElement calendarPopup;
 
     @FindBy(xpath = "/html/body/div[10]/div[1]/table/thead/tr[1]/th[2]")
-    private WebElement calendarCurrentMonth;
+    private WebElement calendarCurrentMonthYear;
 
-    @FindBy(xpath = "/html/body/div[10]/div[1]/table/thead/tr[1]/th[3]")
-    private WebElement nextMonthButton;
+    @FindBy(xpath = "/html/body/div[10]/div[2]/table/thead/tr/th[3]")
+    private WebElement calendarNextButton;
+
+    @FindBy(xpath = "/html/body/div[10]/div[2]/table/thead/tr/th[2]")
+    private WebElement calendarYear;
+
+    @FindBy(xpath = "/html/body/div[10]/div[2]/table/thead/tr/th[1]")
+    private WebElement calendarPreviousButton;
+
+    @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[10]/div[2]/table/tbody/tr/td/span"))
+    private List<WebElement> calendarMonths;
 
     @FindAll(@FindBy(how = How.XPATH,using="/html/body/div[10]/div[1]/table/tbody/tr/td[not(contains(@class,'day  old'))][not(contains(@class,'day disabled old'))]"))
     private List<WebElement> calendarDates;
@@ -97,7 +106,7 @@ public class TourSearchBar extends CommonMethods
         }
 
         private void enterDate(String date){
-        chooseDate(calendarPopup,calendarCurrentMonth,nextMonthButton,calendarDates,date);
+        chooseDate(calendarPopup,calendarCurrentMonthYear,calendarNextButton,calendarPreviousButton,calendarYear,calendarDates,calendarMonths,date);
         }
 
         private void enterTourType(String type){

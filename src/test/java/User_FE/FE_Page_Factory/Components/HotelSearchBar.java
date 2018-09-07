@@ -22,22 +22,40 @@ public class HotelSearchBar extends CommonMethods {
     private WebElement firstHOCDropdownElement;
 
     @FindBy(xpath = "//*[@id=\"dpd1\"]/div")
-    private WebElement checkInDatePopup;
+    private WebElement checkInCalendarPopup;
 
     @FindBy(xpath = "//*[@id=\"dpd2\"]/div")
     private WebElement checkoutCalendarPopup;
 
-    @FindBy(xpath = "/html/body/div[8]/div[1]/table/thead/tr[1]/th[3]")
-    private WebElement checkIncalendarNextMonthButton;
+    @FindBy(xpath = "/html/body/div[8]/div[2]/table/thead/tr/th[3]")
+    private WebElement checkIncalendarNextYearButton;
 
-    @FindBy(xpath = "/html/body/div[9]/div[1]/table/thead/tr[1]/th[3]")
-    private WebElement checkOutCalendarNextMonthButton;
+    @FindBy(xpath = "/html/body/div[8]/div[2]/table/thead/tr/th[1]")
+    private WebElement checkInCalendarPreviousYearButton;
+
+    @FindBy(xpath = "/html/body/div[9]/div[2]/table/thead/tr/th[3]")
+    private WebElement checkOutCalendarNextYearButton;
+
+    @FindBy(xpath = "/html/body/div[9]/div[2]/table/thead/tr/th[1]")
+    private WebElement checkOutCalendarPreviousYearButton;
+
+    @FindBy(xpath = "/html/body/div[9]/div[2]/table/thead/tr/th[2]")
+    private WebElement checkOutCalendarYear;
+
+    @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[9]/div[2]/table/tbody/tr/td/span"))
+    private List<WebElement> checkOutCalendarMonths;
 
     @FindBy(xpath = "/html/body/div[8]/div[1]/table/thead/tr[1]/th[2]")
-    private WebElement checkInCalendarcCurentMonth;
+    private WebElement checkInCalendarcMonthYear;
+
+    @FindBy(xpath = "/html/body/div[8]/div[2]/table/thead/tr/th[2]")
+    private WebElement checkInCalendarCurrentYear;
+
+    @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[8]/div[2]/table/tbody/tr/td/span"))
+    private List<WebElement> checkInCalendarMonths;
 
     @FindBy(xpath = "/html/body/div[9]/div[1]/table/thead/tr[1]/th[2]")
-    private WebElement checkOutCalendarCurrentMonth;
+    private WebElement checkOutCalendarMonthYear;
 
     @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[8]/div[1]/table/tbody/tr/td[not(contains(@class,'day  old'))]" +
             "[not(contains(@class,'day disabled old'))]" ))
@@ -73,8 +91,8 @@ public class HotelSearchBar extends CommonMethods {
     private final String searchResultsPageTitle = "Search Results";
 
     private void setDates(String checkInDate, String  checkOutDate){
-        chooseDate(checkInDatePopup,checkInCalendarcCurentMonth,checkIncalendarNextMonthButton,checkInCalendarDates,checkInDate);
-        chooseDate(checkoutCalendarPopup,checkOutCalendarCurrentMonth,checkOutCalendarNextMonthButton,checkOutCalendarDates,checkOutDate);
+        chooseDate(checkInCalendarPopup,checkInCalendarcMonthYear,checkIncalendarNextYearButton,checkInCalendarPreviousYearButton,checkInCalendarCurrentYear,checkInCalendarDates,checkInCalendarMonths,checkInDate);
+        chooseDate(checkoutCalendarPopup,checkOutCalendarMonthYear,checkOutCalendarNextYearButton,checkOutCalendarPreviousYearButton,checkOutCalendarYear,checkOutCalendarDates,checkOutCalendarMonths,checkOutDate);
 
     }
 

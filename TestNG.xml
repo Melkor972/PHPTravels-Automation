@@ -1,9 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="Suite1" verbose="1" >
-    <test name="HotelSearch" >
+<suite name="User Front End tests" verbose="1" >
+    <test name="Search Tests" >
         <classes>
-            <class name="User_FE.Tests.AccountTests" />
+            <class name="User_FE.Tests.SearchTests" />
+        </classes>
+    </test>
+    <test name="Account Tests">
+        <classes>
+            <class name="User_FE.Tests.AccountTests"/>
         </classes>
     </test>
 </suite>

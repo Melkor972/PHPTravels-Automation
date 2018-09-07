@@ -35,9 +35,17 @@ public class AccountPage extends CommonMethods {
 
         WebElement element = findTripByID(bookingID);
         String invoiceButtonXpath = getAbsoluteXPath(element)+"/div[4]/a";
+        String winHandleBefore = driver.getWindowHandle();
         driver.findElement(By.xpath(invoiceButtonXpath)).click();
 
+
+        for(String winHandle : driver.getWindowHandles()){
+            driver.switchTo().window(winHandle);
+        }
+
         Assert.assertTrue(driver.getTitle().equals("Invoice"));
+
+
 
     }
 

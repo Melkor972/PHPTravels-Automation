@@ -42,10 +42,19 @@ public class FlightsSearchBar extends CommonMethods {
     private WebElement departureCalendarPopup;
 
     @FindBy(xpath = "/html/body/div[13]/div[1]/table/thead/tr[1]/th[2]")
-    private WebElement departureCalendarCurrentMonthYear;
+    private WebElement departureCalendarMonthYear;
 
-    @FindBy(xpath = "/html/body/div[13]/div[1]/table/thead/tr[1]/th[3]")
+    @FindBy(xpath = "/html/body/div[13]/div[2]/table/thead/tr/th[3]")
     private WebElement departureCalendarNextButton;
+
+    @FindBy(xpath = "/html/body/div[13]/div[2]/table/thead/tr/th[2]")
+    private WebElement departureCalendarYear;
+
+    @FindBy(xpath = "/html/body/div[13]/div[2]/table/thead/tr/th[1]")
+    private WebElement departureCalendarPreviousButton;
+
+    @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[13]/div[2]/table/tbody/tr/td/span"))
+    private List<WebElement> departureMonths;
 
     @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[13]/div[1]/table/tbody/tr/td[not(contains(@class,'day  old'))][not(contains(@class,'day disabled old'))]"))
     private List<WebElement> departureCalendarDays;
@@ -54,10 +63,19 @@ public class FlightsSearchBar extends CommonMethods {
     private WebElement returnCalendarPopup;
 
     @FindBy(xpath = "/html/body/div[14]/div[1]/table/thead/tr[1]/th[2]")
-    private WebElement returnCalendarCurrentMonthYear;
+    private WebElement returnCalendarMonthYear;
 
-    @FindBy(xpath = "/html/body/div[14]/div[1]/table/thead/tr[1]/th[3]")
+    @FindBy(xpath = "/html/body/div[14]/div[2]/table/thead/tr/th[2]")
+    private WebElement returnCalendarYear;
+
+    @FindBy(xpath = "/html/body/div[14]/div[2]/table/thead/tr/th[3]")
     private WebElement returnCalendarNextButton;
+
+    @FindBy(xpath = "/html/body/div[14]/div[2]/table/thead/tr/th[1]")
+    private WebElement returnCalendarPreviousButton;
+
+    @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[14]/div[2]/table/tbody/tr/td/span"))
+    private List<WebElement> returnMonths;
 
     @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[14]/div[1]/table/tbody/tr/td[not(contains(@class,'day  old'))][not(contains(@class,'day disabled old'))]"))
     private List<WebElement> returnCalendarDays;
@@ -119,9 +137,9 @@ private void setTripType(String tripType){
 private void seDates(String departureDate, String returnDate){
 
 
-        chooseDate(departureCalendarPopup,departureCalendarCurrentMonthYear,departureCalendarNextButton,departureCalendarDays,departureDate);
+        chooseDate(departureCalendarPopup,departureCalendarMonthYear,departureCalendarNextButton,departureCalendarPreviousButton,departureCalendarYear,departureCalendarDays,departureMonths,departureDate);
         if(returnCalendarPopup.isEnabled()){
-            chooseDate(returnCalendarPopup,returnCalendarCurrentMonthYear,returnCalendarNextButton,returnCalendarDays,returnDate);
+            chooseDate(returnCalendarPopup,returnCalendarMonthYear,returnCalendarNextButton,returnCalendarPreviousButton,returnCalendarYear,returnCalendarDays,returnMonths,returnDate);
         }
 
 

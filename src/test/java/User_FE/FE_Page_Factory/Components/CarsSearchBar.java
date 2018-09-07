@@ -43,16 +43,37 @@ public class CarsSearchBar extends CommonMethods {
     private WebElement departureCalendar;
 
     @FindBy(xpath = "/html/body/div[11]/div[1]/table/thead/tr[1]/th[2]")
-    private WebElement departureCalendarCurrentMonthYear;
+    private WebElement departureCalendarMonthYear;
 
-    @FindBy(xpath = "/html/body/div[11]/div[1]/table/thead/tr[1]/th[3]")
+    @FindBy(xpath = "/html/body/div[11]/div[2]/table/thead/tr/th[2]")
+    private WebElement departureCalenarYear;
+
+    @FindBy(xpath = "/html/body/div[11]/div[2]/table/thead/tr/th[3]")
     private WebElement departureCalendarNextButton;
+
+    @FindBy(xpath = "/html/body/div[11]/div[2]/table/thead/tr/th[1]")
+    private WebElement departureCalendarPreviousButton;
+
+    @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[11]/div[2]/table/tbody/tr/td/span"))
+    private List<WebElement> departureCalendarMonths;
 
     @FindBy(xpath = "//*[@id=\"CARS\"]/form/div[5]")
     private WebElement arrivalCalendar;
 
+    @FindBy(xpath = "/html/body/div[12]/div[2]/table/thead/tr/th[3]")
+    private WebElement arrivalCalenarNextButton;
+
     @FindBy(xpath = "/html/body/div[12]/div[1]/table/thead/tr[1]/th[2]")
-    private WebElement arrivalCalenarCurrentMonthYear;
+    private WebElement arrivalCalenarMonthYear;
+
+    @FindBy(xpath = "/html/body/div[12]/div[2]/table/thead/tr/th[1]")
+    private WebElement arrivalCalenarPreviousButton;
+
+    @FindBy(xpath = "/html/body/div[12]/div[2]/table/thead/tr/th[2]")
+    private WebElement arrivalCalendarYear;
+
+    @FindAll(@FindBy(how = How.XPATH,using = "/html/body/div[12]/div[2]/table/tbody/tr/td/span"))
+    private List<WebElement> arrivalMonths;
 
     @FindBy(xpath = "/html/body/div[12]/div[1]/table/thead/tr[1]/th[3]")
     private WebElement arrivalCalendarNextButton;
@@ -102,9 +123,9 @@ public class CarsSearchBar extends CommonMethods {
 
     }
 
-    private void enterDates(String departureDate, String arrivalDate){
-        chooseDate(departureCalendar,departureCalendarCurrentMonthYear,departureCalendarNextButton,departureDays, departureDate);
-        chooseDate(arrivalCalendar,arrivalCalenarCurrentMonthYear,arrivalCalendarNextButton,arrivalDays,arrivalDate);
+   private void enterDates(String departureDate, String arrivalDate){
+        chooseDate(departureCalendar,departureCalendarMonthYear,departureCalendarNextButton,departureCalendarPreviousButton,departureCalenarYear,departureDays,departureCalendarMonths,departureDate);
+        chooseDate(arrivalCalendar,arrivalCalenarMonthYear,arrivalCalendarNextButton,arrivalCalenarPreviousButton,arrivalCalendarYear,arrivalDays,arrivalMonths,arrivalDate);
 
     }
 

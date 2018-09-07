@@ -1,6 +1,7 @@
 package User_FE.Tests;
 
 import User_FE.FE_Page_Factory.Pages.AccountPage;
+
 import User_FE.FE_Page_Factory.Pages.LoginPage;
 import Utils.ExcelUtils;
 import com.sun.org.glassfish.gmbal.AMXMetadata;
@@ -38,13 +39,14 @@ public class AccountTests {
     }
 
     @Test(dataProvider = "showInvoiceTestData")
-    public void login(String bookingID){
+    public void showInvoice(String bookingID){
         LoginPage loginPage = new LoginPage(driver);
         AccountPage accountPage = loginPage.successfulLogin("user@phptravels.com","demouser","False");
-        accountPage.showInvoice(bookingID);
+       accountPage.showInvoice(bookingID);
 
     }
-    @Test(dataProvider ="reviewTestData" )
+
+    @Test(dataProvider ="reviewTestData")
     public void addReview(String bookingID, String cleanMark ,String comfortMark, String locationMark, String facilityMark, String staffMark, String review){
         LoginPage loginPage = new LoginPage(driver);
         AccountPage accountPage = loginPage.successfulLogin("user@phptravels.com","demouser","False");

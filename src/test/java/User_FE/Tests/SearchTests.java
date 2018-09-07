@@ -38,9 +38,9 @@ public class SearchTests {
     }
 
     @Test(dataProvider = "HotelSearch")
-    public void sampletest(String hotelOrCity, String checkInDate, String checkOutDate, String numberOfAdults, String  numberOfChildren) {
+    public void hotelSearch(String hotelOrCity, String checkInDate, String checkOutDate, String numberOfAdults, String  numberOfChildren) {
         HomePage homePage = new HomePage(driver);
-       homePage.getHotelSearchBar().Search(hotelOrCity, checkInDate,checkOutDate,numberOfAdults,numberOfChildren);
+        homePage.getHotelSearchBar().Search(hotelOrCity, checkInDate,checkOutDate,numberOfAdults,numberOfChildren);
 
     }
 
