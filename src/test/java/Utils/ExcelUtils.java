@@ -61,7 +61,7 @@ public class ExcelUtils {
 
                     tabArray[ci][cj]=getCellData(i,j);
 
-                    System.out.println(tabArray[ci][cj]);
+
 
                 }
 

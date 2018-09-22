@@ -11,7 +11,7 @@ import org.testng.Assert;
 public class VisaSearchBar {
     private WebDriver driver;
 
-    @FindBy(xpath = "//*[@id=\"body-section\"]/section/div[2]/div/div[2]/ul/li[5]/a")
+    @FindBy(xpath = "//a[@href='#VISA']")
     private WebElement visaBarButton;
 
     @FindBy(id = "s2id_autogen4")

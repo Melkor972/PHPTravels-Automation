@@ -15,7 +15,7 @@ import java.util.List;
 public class FlightsSearchBar extends CommonMethods {
     private WebDriver driver;
 
-    @FindBy(xpath = "//*[@id=\"body-section\"]/section/div[2]/div/div[2]/ul/li[2]/a")
+    @FindBy(xpath = "//a[@href='#flights']")
     private WebElement flightsBarButton;
 
     @FindBy(xpath = "//*[@id=\"flights\"]/form/div[9]/div[1]/div/div")

@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 public class CarsSearchBar extends CommonMethods {
     private WebDriver driver;
 
-    @FindBy(xpath = "//*[@id=\"body-section\"]/section/div[2]/div/div[2]/ul/li[4]/a")
+    @FindBy(xpath = "//a[@href='#CARS']")
     private WebElement carsBarButton;
 
     @FindBy(id = "s2id_carlocations")

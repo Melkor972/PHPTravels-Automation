@@ -15,7 +15,7 @@ public class LoginPage  {
     @FindBy(name = "password")
     private WebElement passwordField;
 
-    @FindBy(xpath = "//*[@id=\"loginfrm\"]/div[1]/div[5]/button")
+    @FindBy(xpath = "//*[@id=\"loginfrm\"]/button")
     private WebElement loginButton;
 
     @FindBy(id = "remember-me")
@@ -35,21 +35,24 @@ public class LoginPage  {
         this.driver=driver;
     }
 
-    public void login(String email, String password, String stayLogged){
+    public void login(String email, String password, boolean stayLogged){
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
-        if(stayLogged == "True"){
+        if(stayLogged){
             rememberMeCheckbox.click();
         }
         loginButton.click();
 
 
     }
-    public AccountPage successfulLogin(String email, String password, String stayLogged){
-        login(email,password,stayLogged);
+    public AccountPage successfulLogin( boolean stayLogged){
+
+        //there is only one combination of correct login data hence i hardcoded them
+        //probably should have added them to properties file. Don't sure if it worth to take same combination of data each time from separate file
+        login("user@phptravels.com","demouser",stayLogged);
         return new AccountPage(driver);
     }
-    public void unsuccessfulLogin(String email, String password, String stayLogged){
+    public void unsuccessfulLogin(String email, String password, boolean stayLogged){
         login(email,password,stayLogged);
         checkErrorMessage();
     }

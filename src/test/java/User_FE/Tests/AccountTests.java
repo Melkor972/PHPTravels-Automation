@@ -9,16 +9,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class AccountTests {
     private WebDriver driver;
 
-    @BeforeTest
-    public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+    Properties prop = new Properties();
 
+    @BeforeTest
+    public void setUp() throws IOException {
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        File  file = new File("src\\test\\java\\Utils\\env.properties");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        prop.load(fileInputStream);
+        fileInputStream.close();
     }
+
+
 
     @AfterTest
     public void tearDown() {
@@ -35,13 +47,13 @@ public class AccountTests {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().fullscreen();
-        driver.get("https://www.phptravels.net/login");
+        driver.get(prop.getProperty("LOGINPAGE"));
     }
 
     @Test(dataProvider = "showInvoiceTestData")
     public void showInvoice(String bookingID){
         LoginPage loginPage = new LoginPage(driver);
-        AccountPage accountPage = loginPage.successfulLogin("user@phptravels.com","demouser","False");
+        AccountPage accountPage = loginPage.successfulLogin(false);
        accountPage.showInvoice(bookingID);
 
     }
@@ -49,18 +61,20 @@ public class AccountTests {
     @Test(dataProvider ="reviewTestData")
     public void addReview(String bookingID, String cleanMark ,String comfortMark, String locationMark, String facilityMark, String staffMark, String review){
         LoginPage loginPage = new LoginPage(driver);
-        AccountPage accountPage = loginPage.successfulLogin("user@phptravels.com","demouser","False");
+        AccountPage accountPage = loginPage.successfulLogin(false);
         accountPage.addComment(bookingID,cleanMark,comfortMark,locationMark,facilityMark,staffMark,review);
     }
+
+
     @DataProvider
     public Object[][] reviewTestData() throws Exception{
-        Object[][] dataArray = ExcelUtils.getTableArray("AccountTestsData.xlsx","AddReview");
+        Object[][] dataArray = ExcelUtils.getTableArray(prop.getProperty("ACCOUNTTESTSDATA"),"AddReview");
         return dataArray;
     }
 
     @DataProvider
     public Object[] showInvoiceTestData() throws Exception{
-        Object[][] dataArray = ExcelUtils.getTableArray("AccountTestsData.xlsx","ShowInvoice");
+        Object[][] dataArray = ExcelUtils.getTableArray(prop.getProperty("ACCOUNTTESTSDATA"),"ShowInvoice");
         return dataArray;
     }
 }

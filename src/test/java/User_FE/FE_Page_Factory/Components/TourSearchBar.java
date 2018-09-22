@@ -16,7 +16,7 @@ public class TourSearchBar extends CommonMethods
 {
     private WebDriver driver;
 
-    @FindBy(xpath = "//*[@id=\"body-section\"]/section/div[2]/div/div[2]/ul/li[3]/a")
+    @FindBy(xpath = "//a[@href='#TOURS']")
     private WebElement tourBarButton;
 
     @FindBy(xpath = "//*[@id=\"TOURS\"]/form/div[5]/button")

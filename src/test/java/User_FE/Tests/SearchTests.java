@@ -7,14 +7,22 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.*;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class SearchTests {
     WebDriver driver;
 
-
+Properties prop = new Properties();
     @BeforeTest
-    public void setUp() {
+    public void setUp() throws IOException {
+        File file = new File("src\\test\\java\\Utils\\env.properties");
+        FileInputStream fileInputStream = new FileInputStream(file);
+        prop.load(fileInputStream);
+        fileInputStream.close();
         System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -28,7 +36,7 @@ public class SearchTests {
 
     @BeforeMethod
     public void openHomePage() {
-        driver.get("https://www.phptravels.net/");
+        driver.get(prop.getProperty("HOMEPAGE"));
     }
 
     @org.testng.annotations.Test(dataProvider = "CarSearch")
@@ -68,35 +76,34 @@ public class SearchTests {
 
  }
 
-
     @DataProvider
     public Object[][] HotelSearch() throws Exception {
-        Object[][] dataArray = ExcelUtils.getTableArray("SearchTestsData.xlsx", "HotelsSearch");
+        Object[][] dataArray = ExcelUtils.getTableArray(prop.getProperty("SEARCHTESTSDATA"), "HotelsSearch");
         return dataArray;
     }
 
     @DataProvider
     public Object[][] TourSearch() throws Exception {
-        Object[][] dataArray = ExcelUtils.getTableArray("SearchTestsData.xlsx", "ToursSearch");
+        Object[][] dataArray = ExcelUtils.getTableArray(prop.getProperty("SEARCHTESTSDATA"), "ToursSearch");
         return dataArray;
     }
 
     @DataProvider
     public Object[][] FlightSearch() throws Exception {
-        Object[][] dataArray = ExcelUtils.getTableArray("SearchTestsData.xlsx", "FlightsSearch");
+        Object[][] dataArray = ExcelUtils.getTableArray(prop.getProperty("SEARCHTESTSDATA"), "FlightsSearch");
         return dataArray;
 
     }
 
     @DataProvider
     public Object[][] VisaSearch() throws Exception{
-       Object[][] dataArray = ExcelUtils.getTableArray("SearchTestsData.xlsx","VisaSearch");
+       Object[][] dataArray = ExcelUtils.getTableArray(prop.getProperty("SEARCHTESTSDATA"),"VisaSearch");
        return dataArray;
     }
 
     @DataProvider
     public Object[][] CarSearch() throws Exception{
-       Object[][] dataArray = ExcelUtils.getTableArray("SearchTestsData.xlsx","CarsSearch");
+       Object[][] dataArray = ExcelUtils.getTableArray(prop.getProperty("SEARCHTESTSDATA"),"CarsSearch");
        return dataArray;
     }
 
